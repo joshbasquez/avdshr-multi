@@ -4,7 +4,7 @@
         "kind": "Form",
         "properties": {
             "isWizard": false,
-            "title": "Azure Virtual Desktop - Session Host Replacer Deployment",
+            "title": "Azure Virtual Desktop - Session Host Replacer Deployment2",
             "steps": [
                 {
                     "name": "basics",

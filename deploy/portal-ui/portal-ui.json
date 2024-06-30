@@ -41,7 +41,7 @@
                                     "type": "Microsoft.Common.CheckBox",
                                     "label": "Select existing Log Analytics Workspace",
                                     "toolTip": "If enabled, the session host replacer will use the selected Log Analytics Workspace. If disabled, the session host replacer will create a new Log Analytics Workspace.",
-                                    "defaultValue": true
+                                    "defaultValue": true,
                                     "constraints": {
                                         "required": true
                                     }

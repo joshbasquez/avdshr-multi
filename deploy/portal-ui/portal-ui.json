@@ -43,7 +43,7 @@
                                     "toolTip": "If enabled, the session host replacer will use the selected Log Analytics Workspace. If disabled, the session host replacer will create a new Log Analytics Workspace.",
                                     "defaultValue": true, 
                                     "constraints": {
-                                        "required": true
+                                        "required": false
                                     }
                                 },
                                 {

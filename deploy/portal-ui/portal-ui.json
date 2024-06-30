@@ -725,7 +725,7 @@
                             "name": "sessionHostNamePrefix",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Session Host Name Prefix",
-                            "toolTip": "BLAH SOME TEXT IN THE TOOL TIP I WONDER WHAT THE LIMIT IS FOR THIS LONG ASS PIECE OF TEXT I NEED TO CRAM IN HERE. The session host names will be in the format prefix-number.",
+                            "toolTip": "The session host names will be in the format prefix-number.",
                             "constraints": {
                                 "required": true,
                                 "validationMessage": "Must be a valid name less than 12 characters long to allow for the 3 character suffix (eg. prefix-01)."

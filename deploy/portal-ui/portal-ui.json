@@ -30,7 +30,7 @@
                                     "type": "Microsoft.Common.CheckBox",
                                     "label": "Enable Monitoring",
                                     "toolTip": "[Recommended] If enabled, the session host replacer will use App Insights and Log Analytics to collect metrics and logs.",
-                                    "defaultValue": true,
+                                    "defaultValue": false,
                                     "constraints": {
                                         "required": false
                                     }
@@ -43,7 +43,7 @@
                                     "toolTip": "If enabled, the session host replacer will use the selected Log Analytics Workspace. If disabled, the session host replacer will create a new Log Analytics Workspace.",
                                     "defaultValue": true,
                                     "constraints": {
-                                        "required": false
+                                        "required": true
                                     }
                                 },
                                 {

@@ -13,6 +13,7 @@
                         {
                             "name": "resourceScope",
                             "type": "Microsoft.Common.ResourceScope",
+                            "label": "Resource Scope for Function App",
                             "location": {
                                 "resourceTypes": [
                                     "Microsoft.DesktopVirtualization/HostPools"
@@ -66,7 +67,7 @@
                             "type": "Microsoft.Common.TextBlock",
                             "visible": true,
                             "options": {
-                                "text": "AVD session host replacer Portal UI Version: 240629-2320",
+                                "text": "AVD session host replacer Portal UI Version: 240629-2328",
                                 "link": {
                                     "label": "GitHub Repository",
                                     "uri": "https://github.com/Azure/AVDSessionHostReplacer"

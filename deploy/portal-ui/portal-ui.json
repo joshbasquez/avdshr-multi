@@ -1180,7 +1180,18 @@
                             }
                         },
                         {
-                            "name": "_SessionHostResourceGroupName",
+                            "name": "_SessionHostResourceGroupNameA",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Session Hosts Resource Group Name",
+                            "placeholder": "Same As Host Pool Resource Group",
+                            "toolTip": "Leave this empty to deploy to same resource group as the host pool.",
+                            "defaultValue": "",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "name": "_SessionHostResourceGroupNameB",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Session Hosts Resource Group Name",
                             "placeholder": "Same As Host Pool Resource Group",

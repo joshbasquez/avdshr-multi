@@ -542,7 +542,7 @@
             },
             "FunctionAppZipUrl": {
               "type": "string",
-              "defaultValue": "https://github.com/joshbasquez/AVDSessionHostReplacer/archive/refs/tags/Beta.zip",
+              "defaultValue": "https://github.com/joshbasquez/AVDSessionHostReplacer/releases/download/v0.0.1/FunctionApp.zip",
               "metadata": {
                 "description": "Required: No | URL of the FunctionApp.zip file. This is the zip file containing the Function App code. | Default: The latest release of the Function App code."
               }

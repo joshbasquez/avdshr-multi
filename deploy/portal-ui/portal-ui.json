@@ -67,7 +67,7 @@
                             "type": "Microsoft.Common.TextBlock",
                             "visible": true,
                             "options": {
-                                "text": "AVD session host replacer Portal UI Version: 240629-2328",
+                                "text": "AVD session host replacer Portal UI Version: 240701-0920",
                                 "link": {
                                     "label": "GitHub Repository",
                                     "uri": "https://github.com/Azure/AVDSessionHostReplacer"
@@ -81,9 +81,293 @@
                     "label": "Session Hosts Template",
                     "elements": [
                         {
-                            "name": "SessionHostsRegion",
+                            "name": "SessionHostsRegionA",
                             "type": "Microsoft.Common.DropDown",
-                            "label": "Session Hosts Region",
+                            "label": "Session Hosts Region - Side A",
+                            "visible": true,
+                            "filter": true,
+                            "multiselect": false,
+                            "selectAll": false,
+                            "defaultValue": null,
+                            "toolTip": "Select region to deploy session hosts.",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "value": "eastus",
+                                        "label": "East US"
+                                    },
+                                    {
+                                        "value": "eastus2",
+                                        "label": "East US 2"
+                                    },
+                                    {
+                                        "value": "southcentralus",
+                                        "label": "South Central US"
+                                    },
+                                    {
+                                        "value": "westus2",
+                                        "label": "West US 2"
+                                    },
+                                    {
+                                        "value": "westus3",
+                                        "label": "West US 3"
+                                    },
+                                    {
+                                        "value": "australiaeast",
+                                        "label": "Australia East"
+                                    },
+                                    {
+                                        "value": "southeastasia",
+                                        "label": "Southeast Asia"
+                                    },
+                                    {
+                                        "value": "northeurope",
+                                        "label": "North Europe"
+                                    },
+                                    {
+                                        "value": "swedencentral",
+                                        "label": "Sweden Central"
+                                    },
+                                    {
+                                        "value": "uksouth",
+                                        "label": "UK South"
+                                    },
+                                    {
+                                        "value": "westeurope",
+                                        "label": "West Europe"
+                                    },
+                                    {
+                                        "value": "centralus",
+                                        "label": "Central US"
+                                    },
+                                    {
+                                        "value": "southafricanorth",
+                                        "label": "South Africa North"
+                                    },
+                                    {
+                                        "value": "centralindia",
+                                        "label": "Central India"
+                                    },
+                                    {
+                                        "value": "eastasia",
+                                        "label": "East Asia"
+                                    },
+                                    {
+                                        "value": "japaneast",
+                                        "label": "Japan East"
+                                    },
+                                    {
+                                        "value": "koreacentral",
+                                        "label": "Korea Central"
+                                    },
+                                    {
+                                        "value": "canadacentral",
+                                        "label": "Canada Central"
+                                    },
+                                    {
+                                        "value": "francecentral",
+                                        "label": "France Central"
+                                    },
+                                    {
+                                        "value": "germanywestcentral",
+                                        "label": "Germany West Central"
+                                    },
+                                    {
+                                        "value": "italynorth",
+                                        "label": "Italy North"
+                                    },
+                                    {
+                                        "value": "norwayeast",
+                                        "label": "Norway East"
+                                    },
+                                    {
+                                        "value": "polandcentral",
+                                        "label": "Poland Central"
+                                    },
+                                    {
+                                        "value": "switzerlandnorth",
+                                        "label": "Switzerland North"
+                                    },
+                                    {
+                                        "value": "uaenorth",
+                                        "label": "UAE North"
+                                    },
+                                    {
+                                        "value": "brazilsouth",
+                                        "label": "Brazil South"
+                                    },
+                                    {
+                                        "value": "centraluseuap",
+                                        "label": "Central US EUAP"
+                                    },
+                                    {
+                                        "value": "israelcentral",
+                                        "label": "Israel Central"
+                                    },
+                                    {
+                                        "value": "qatarcentral",
+                                        "label": "Qatar Central"
+                                    },
+                                    {
+                                        "value": "asia",
+                                        "label": "Asia"
+                                    },
+                                    {
+                                        "value": "asiapacific",
+                                        "label": "Asia Pacific"
+                                    },
+                                    {
+                                        "value": "australia",
+                                        "label": "Australia"
+                                    },
+                                    {
+                                        "value": "brazil",
+                                        "label": "Brazil"
+                                    },
+                                    {
+                                        "value": "canada",
+                                        "label": "Canada"
+                                    },
+                                    {
+                                        "value": "europe",
+                                        "label": "Europe"
+                                    },
+                                    {
+                                        "value": "france",
+                                        "label": "France"
+                                    },
+                                    {
+                                        "value": "germany",
+                                        "label": "Germany"
+                                    },
+                                    {
+                                        "value": "global",
+                                        "label": "Global"
+                                    },
+                                    {
+                                        "value": "india",
+                                        "label": "India"
+                                    },
+                                    {
+                                        "value": "japan",
+                                        "label": "Japan"
+                                    },
+                                    {
+                                        "value": "korea",
+                                        "label": "Korea"
+                                    },
+                                    {
+                                        "value": "norway",
+                                        "label": "Norway"
+                                    },
+                                    {
+                                        "value": "singapore",
+                                        "label": "Singapore"
+                                    },
+                                    {
+                                        "value": "southafrica",
+                                        "label": "South Africa"
+                                    },
+                                    {
+                                        "value": "sweden",
+                                        "label": "Sweden"
+                                    },
+                                    {
+                                        "value": "switzerland",
+                                        "label": "Switzerland"
+                                    },
+                                    {
+                                        "value": "unitedstates",
+                                        "label": "United States"
+                                    },
+                                    {
+                                        "value": "northcentralus",
+                                        "label": "North Central US"
+                                    },
+                                    {
+                                        "value": "westus",
+                                        "label": "West US"
+                                    },
+                                    {
+                                        "value": "japanwest",
+                                        "label": "Japan West"
+                                    },
+                                    {
+                                        "value": "eastus2euap",
+                                        "label": "East US 2 EUAP"
+                                    },
+                                    {
+                                        "value": "westcentralus",
+                                        "label": "West Central US"
+                                    },
+                                    {
+                                        "value": "southafricawest",
+                                        "label": "South Africa West"
+                                    },
+                                    {
+                                        "value": "australiacentral",
+                                        "label": "Australia Central"
+                                    },
+                                    {
+                                        "value": "australiacentral2",
+                                        "label": "Australia Central 2"
+                                    },
+                                    {
+                                        "value": "australiasoutheast",
+                                        "label": "Australia Southeast"
+                                    },
+                                    {
+                                        "value": "koreasouth",
+                                        "label": "Korea South"
+                                    },
+                                    {
+                                        "value": "southindia",
+                                        "label": "South India"
+                                    },
+                                    {
+                                        "value": "westindia",
+                                        "label": "West India"
+                                    },
+                                    {
+                                        "value": "canadaeast",
+                                        "label": "Canada East"
+                                    },
+                                    {
+                                        "value": "francesouth",
+                                        "label": "France South"
+                                    },
+                                    {
+                                        "value": "germanynorth",
+                                        "label": "Germany North"
+                                    },
+                                    {
+                                        "value": "norwaywest",
+                                        "label": "Norway West"
+                                    },
+                                    {
+                                        "value": "switzerlandwest",
+                                        "label": "Switzerland West"
+                                    },
+                                    {
+                                        "value": "ukwest",
+                                        "label": "UK West"
+                                    },
+                                    {
+                                        "value": "uaecentral",
+                                        "label": "UAE Central"
+                                    },
+                                    {
+                                        "value": "brazilsoutheast",
+                                        "label": "Brazil Southeast"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "SessionHostsRegionB",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Session Hosts Region - Side B",
                             "visible": true,
                             "filter": true,
                             "multiselect": false,
@@ -565,9 +849,25 @@
                             ]
                         },
                         {
-                            "name": "SubnetId",
+                            "name": "SubnetIdA",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Subnet ID",
+                            "label": "Site A - Subnet ID",
+                            "visible": true,
+                            "placeholder": "Add resource id of subnet in the same region as the Session Hosts",
+                            "constraints": {
+                                "required": true,
+                                "validations": [
+                                    {
+                                        "regex": ".*/subnets/[A-Za-z0-9_\\.-]+$",
+                                        "message": "Invalid Subnet Resource ID. Make sure it ends with /subnets/SubnetName"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "SubnetIdB",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Site B - Subnet ID",
                             "visible": true,
                             "placeholder": "Add resource id of subnet in the same region as the Session Hosts",
                             "constraints": {
@@ -723,9 +1023,19 @@
                             }
                         },
                         {
-                            "name": "sessionHostNamePrefix",
+                            "name": "sessionHostNamePrefixA",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Session Host Name Prefix",
+                            "label": "Session Host Name Prefix - Site A",
+                            "toolTip": "The session host names will be in the format [prefix-number].",
+                            "constraints": {
+                                "required": true,
+                                "validationMessage": "Must be a valid name less than 12 characters long to allow for the 3 character suffix (eg. prefix-01)."
+                            }
+                        },
+                        {
+                            "name": "sessionHostNamePrefixB",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Session Host Name Prefix - Site B",
                             "toolTip": "The session host names will be in the format [prefix-number].",
                             "constraints": {
                                 "required": true,
@@ -889,7 +1199,8 @@
                 "EnableMonitoring": "[steps('basics').MonitoringSection.EnableMonitoring]",
                 "UseExistingLAW": "[steps('basics').MonitoringSection.UseExistingLAW]",
                 "LogAnalyticsWorkspaceId": "[if(steps('basics').MonitoringSection.UseExistingLAW, steps('basics').MonitoringSection.LAWSelector.id, '')]",
-                "SessionHostsRegion": "[steps('SessionHostsTemplate').SessionHostsRegion]",
+                "SessionHostsRegionA": "[steps('SessionHostsTemplate').SessionHostsRegionA]",
+                "SessionHostsRegionB": "[steps('SessionHostsTemplate').SessionHostsRegionB]",
                 "AvailabilityZones": "[steps('SessionHostsTemplate').AvailabilityZones]",
                 "SessionHostSize": "[steps('SessionHostsTemplate').SessionHostSize]",
                 "AcceleratedNetworking": "[steps('SessionHostsTemplate').AcceleratedNetworking]",
@@ -902,7 +1213,8 @@
                 "TpmEnabled": "[steps('SessionHostsTemplate').sessionHostsSecuritySection.TpmEnabled]",
                 "IdentityServiceProvider": "[steps('SessionHostsTemplate').DomainJoinSection.IdentityServiceProvider]",
                 "IntuneEnrollment": "[steps('SessionHostsTemplate').DomainJoinSection.IntuneEnrollment]",
-                "SubnetId": "[steps('SessionHostsTemplate').SubnetId]",
+                "SubnetIdA": "[steps('SessionHostsTemplate').SubnetIdA]",
+                "SubnetIdB": "[steps('SessionHostsTemplate').SubnetIdB]",
                 "ADDomainName": "[steps('SessionHostsTemplate').DomainJoinSection.ADDomainName]",
                 "ADDomainJoinUserName": "[steps('SessionHostsTemplate').DomainJoinSection.ADDomainJoinUserName]",
                 "ADJoinUserPassword": "[steps('SessionHostsTemplate').DomainJoinSection.ADJoinUserPassword]",
@@ -910,7 +1222,8 @@
                 "LocalAdminUsername": "[steps('SessionHostsTemplate').LocalAdminUsername]",
                 "HostPoolResourceGroupName": "[steps('RequiredParametersStep').HostPoolSelector.resourceGroup]",
                 "HostPoolName": "[steps('RequiredParametersStep').HostPoolSelector.name]",
-                "SessionHostNamePrefix": "[steps('RequiredParametersStep').sessionHostNamePrefix]",
+                "SessionHostNamePrefixA": "[steps('RequiredParametersStep').sessionHostNamePrefixA]",
+                "SessionHostNamePrefixB": "[steps('RequiredParametersStep').sessionHostNamePrefixB]",
                 "TargetSessionHostCount": "[steps('RequiredParametersStep').sessionHostsCount]",
                 "TagIncludeInAutomation": "[steps('optionalParametersStep')._Tag_IncludeInAutomation]",
                 "TagDeployTimestamp": "[steps('optionalParametersStep')._Tag_DeployTimestamp]",
@@ -925,7 +1238,8 @@
                 "ReplaceSessionHostOnNewImageVersion": "[steps('optionalParametersStep')._ReplaceSessionHostOnNewImageVersion]",
                 "ReplaceSessionHostOnNewImageVersionDelayDays": "[steps('optionalParametersStep')._ReplaceSessionHostOnNewImageVersionDelayDays]",
                 "VMNamesTemplateParameterName": "[steps('optionalParametersStep')._VMNamesTemplateParameterName]",
-                "SessionHostResourceGroupName": "[steps('optionalParametersStep')._SessionHostResourceGroupName]"
+                "SessionHostResourceGroupNameA": "[steps('optionalParametersStep')._SessionHostResourceGroupNameA]",
+                "SessionHostResourceGroupNameB": "[steps('optionalParametersStep')._SessionHostResourceGroupNameB]"
             },
             "kind": "ResourceGroup",
             "location": "[steps('basics').resourceScope.location.name]",

@@ -31,7 +31,10 @@
         "description": "Required: Yes | Name of the Log Analytics Workspace used by the Function App Insights."
       }
     },
-    "SessionHostsRegion": {
+    "SessionHostsRegionA": {
+      "type": "string"
+    },
+    "SessionHostsRegionB": {
       "type": "string"
     },
     "AvailabilityZones": {
@@ -97,7 +100,10 @@
     "TpmEnabled": {
       "type": "bool"
     },
-    "SubnetId": {
+    "SubnetIdA": {
+      "type": "string"
+    },
+    "SubnetIdB": {
       "type": "string"
     },
     "IdentityServiceProvider": {
@@ -131,7 +137,14 @@
     "LocalAdminUsername": {
       "type": "string"
     },
-    "HostPoolResourceGroupName": {
+    "HostPoolResourceGroupNameA": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Required: No | Name of the resource group containing the Azure Virtual Desktop Host Pool. | Default: The resource group of the Function App."
+      }
+    },
+    "HostPoolResourceGroupNameB": {
       "type": "string",
       "defaultValue": "[resourceGroup().name]",
       "metadata": {
@@ -144,7 +157,14 @@
         "description": "Required: Yes | Name of the Azure Virtual Desktop Host Pool."
       }
     },
-    "SessionHostNamePrefix": {
+    "SessionHostNamePrefixA": {
+      "type": "string",
+      "maxLength": 12,
+      "metadata": {
+        "description": "Required: Yes | Prefix used for the name of the session hosts."
+      }
+    },
+    "SessionHostNamePrefixB": {
       "type": "string",
       "maxLength": 12,
       "metadata": {
@@ -248,7 +268,14 @@
         "description": "Required: No | The name of the parameter in the template that specifies the VM Names array."
       }
     },
-    "SessionHostResourceGroupName": {
+    "SessionHostResourceGroupNameA": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Required: No | Leave this empty to deploy to same resource group as the host pool."
+      }
+    },
+    "SessionHostResourceGroupNameB": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
@@ -368,8 +395,12 @@
           "ReplacementPlanSettings": {
             "value": [
               {
-                "name": "_HostPoolResourceGroupName",
-                "value": "[parameters('HostPoolResourceGroupName')]"
+                "name": "_HostPoolResourceGroupNameA",
+                "value": "[parameters('HostPoolResourceGroupNameA')]"
+              },
+              {
+                "name": "_HostPoolResourceGroupNameB",
+                "value": "[parameters('HostPoolResourceGroupNameB')]"
               },
               {
                 "name": "_HostPoolName",
@@ -380,16 +411,24 @@
                 "value": "[parameters('TargetSessionHostCount')]"
               },
               {
-                "name": "_SessionHostNamePrefix",
-                "value": "[parameters('SessionHostNamePrefix')]"
+                "name": "_SessionHostNamePrefixA",
+                "value": "[parameters('SessionHostNamePrefixA')]"
+              },
+              {
+                "name": "_SessionHostNamePrefixB",
+                "value": "[parameters('SessionHostNamePrefixB')]"
               },
               {
                 "name": "_SessionHostTemplate",
                 "value": "[reference(resourceId('Microsoft.Resources/deployments', 'deployStandardSessionHostTemplate'), '2022-09-01').outputs.TemplateSpecResourceId.value]"
               },
               {
-                "name": "_SessionHostParameters",
-                "value": "[string(createObject('Location', parameters('SessionHostsRegion'), 'AvailabilityZones', parameters('AvailabilityZones'), 'VMSize', parameters('SessionHostSize'), 'AcceleratedNetworking', parameters('AcceleratedNetworking'), 'DiskType', parameters('SessionHostDiskType'), 'ImageReference', variables('varImageReference'), 'SecurityProfile', variables('varSecurityProfile'), 'SubnetId', parameters('SubnetId'), 'DomainJoinObject', variables('varDomainJoinObject'), 'DomainJoinPassword', if(equals(parameters('IdentityServiceProvider'), 'EntraID'), null(), createObject('reference', createObject('keyVault', createObject('id', reference(resourceId('Microsoft.Resources/deployments', 'deployKeyVault'), '2022-09-01').outputs.keyVaultId.value), 'secretName', 'DomainJoinPassword'))), 'AdminUsername', parameters('LocalAdminUsername'), 'tags', createObject()))]"
+                "name": "_SessionHostParametersA",
+                "value": "[string(createObject('Location', parameters('SessionHostsRegionA'), 'AvailabilityZones', parameters('AvailabilityZones'), 'VMSize', parameters('SessionHostSize'), 'AcceleratedNetworking', parameters('AcceleratedNetworking'), 'DiskType', parameters('SessionHostDiskType'), 'ImageReference', variables('varImageReference'), 'SecurityProfile', variables('varSecurityProfile'), 'SubnetId', parameters('SubnetIdA'), 'DomainJoinObject', variables('varDomainJoinObject'), 'DomainJoinPassword', if(equals(parameters('IdentityServiceProvider'), 'EntraID'), null(), createObject('reference', createObject('keyVault', createObject('id', reference(resourceId('Microsoft.Resources/deployments', 'deployKeyVault'), '2022-09-01').outputs.keyVaultId.value), 'secretName', 'DomainJoinPassword'))), 'AdminUsername', parameters('LocalAdminUsername'), 'tags', createObject()))]"
+              },
+              {
+                "name": "_SessionHostParametersB",
+                "value": "[string(createObject('Location', parameters('SessionHostsRegionB'), 'AvailabilityZones', parameters('AvailabilityZones'), 'VMSize', parameters('SessionHostSize'), 'AcceleratedNetworking', parameters('AcceleratedNetworking'), 'DiskType', parameters('SessionHostDiskType'), 'ImageReference', variables('varImageReference'), 'SecurityProfile', variables('varSecurityProfile'), 'SubnetId', parameters('SubnetIdB'), 'DomainJoinObject', variables('varDomainJoinObject'), 'DomainJoinPassword', if(equals(parameters('IdentityServiceProvider'), 'EntraID'), null(), createObject('reference', createObject('keyVault', createObject('id', reference(resourceId('Microsoft.Resources/deployments', 'deployKeyVault'), '2022-09-01').outputs.keyVaultId.value), 'secretName', 'DomainJoinPassword'))), 'AdminUsername', parameters('LocalAdminUsername'), 'tags', createObject()))]"
               },
               {
                 "name": "_SubscriptionId",
@@ -452,8 +491,12 @@
                 "value": "[parameters('VMNamesTemplateParameterName')]"
               },
               {
-                "name": "_SessionHostResourceGroupName",
-                "value": "[parameters('SessionHostResourceGroupName')]"
+                "name": "_SessionHostResourceGroupNameA",
+                "value": "[parameters('SessionHostResourceGroupNameA')]"
+              },
+              {
+                "name": "_SessionHostResourceGroupNameB",
+                "value": "[parameters('SessionHostResourceGroupNameB')]"
               }
             ]
           }

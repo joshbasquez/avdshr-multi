@@ -13,13 +13,16 @@
     _ReplaceSessionHostOnNewImageVersion          = @{Required = $false ; Type = 'bool  '  ; Default = $true                              ; Description = '' }
     _ReplaceSessionHostOnNewImageVersionDelayDays = @{Required = $false ; Type = 'int   '  ; Default = 0                                  ; Description = '' }
     _VMNamesTemplateParameterName                 = @{Required = $false ; Type = 'string'  ; Default = 'VMNames'                          ; Description = 'The name of the array parameter used in the Session Host deployment template to define the VM names. Default is "VMNames"' }
-    _SessionHostResourceGroupName                 = @{Required = $false ; Type = 'string'  ; Default = ''                                 ; Description = 'Use this if you want to deploy VMs in a different Resource Group. By default it will be the same Resource Group as Host Pool' }
+    _SessionHostResourceGroupNameA                 = @{Required = $false ; Type = 'string'  ; Default = ''                                 ; Description = 'Use this if you want to deploy VMs in a different Resource Group. By default it will be the same Resource Group as Host Pool' }
+    _SessionHostResourceGroupNameB                 = @{Required = $false ; Type = 'string'  ; Default = ''                                 ; Description = 'Use this if you want to deploy VMs in a different Resource Group. By default it will be the same Resource Group as Host Pool' }    
     _HostPoolResourceGroupName                    = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
     _HostPoolName                                 = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
     _TargetSessionHostCount                       = @{Required = $true  ; Type = 'int'                                                    ; Description = '' }
-    _SessionHostNamePrefix                        = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
+    _SessionHostNamePrefixA                        = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
+    _SessionHostNamePrefixB                        = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
     _SessionHostTemplate                          = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
-    _SessionHostParameters                        = @{Required = $true  ; Type = 'hashtable'                                              ; Description = '' }
+    _SessionHostParametersA                        = @{Required = $true  ; Type = 'hashtable'                                              ; Description = '' }
+    _SessionHostParametersB                        = @{Required = $true  ; Type = 'hashtable'                                              ; Description = '' }
     _SubscriptionId                               = @{Required = $true  ; Type = 'string'                                                 ; Description = '' }
     _RemoveAzureADDevice                          = @{Required = $true  ; Type = 'bool'                                                   ; Description = 'When deleting a session host, will also delete the Azure AD Device record. This is required for Azure AD Joined Session Hosts' }
 }

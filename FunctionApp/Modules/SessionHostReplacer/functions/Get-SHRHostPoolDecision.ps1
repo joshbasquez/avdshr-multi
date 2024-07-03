@@ -39,7 +39,8 @@ function Get-SHRHostPoolDecision {
 
         # Allow downsizing of session hosts if we exceed target session host count.
         [Parameter()]
-        [bool] $AllowDownsizing = [bool](Get-FunctionConfig _AllowDownsizing)
+        [bool] $AllowDownsizing = [bool](Get-FunctionConfig _AllowDownsizing),
+        [Parameter()] [string] $SessionHostPrefix
     )
 
     # Identify Session hosts that should be replaced
@@ -71,7 +72,7 @@ function Get-SHRHostPoolDecision {
     $sessionHostsCurrentTotal = ([array]$sessionHostsToKeep.VMName + [array]$runningDeployments.SessionHostNames ) | Select-Object -Unique
 
     Write-PSFMessage -Level Host -Message "We have {0} good session hosts including {1} session hosts being deployed" -StringValues $sessionHostsCurrentTotal.Count, $runningDeployments.SessionHostNames.Count
-    Write-PSFMessage -Level Host -Message "We target having {0} session hosts in in good shape" -StringValues $TargetSessionHostCount
+    Write-PSFMessage -Level Host -Message "We target having {0} session hosts in in good shape with prefix {1}" -StringValues $TargetSessionHostCount,$SessionHostPrefix
 
     $sessionHostsToDeployCount = $TargetSessionHostCount - $sessionHostsCurrentTotal.Count
 
@@ -88,7 +89,7 @@ function Get-SHRHostPoolDecision {
         Write-PSFMessage -Level Host -Message "We have too many session hosts. We need to decommission {0} session hosts" -StringValues $sessionHostsToDeployCount
         #Sorting by lowest number of sessions and descending vm name
         $sessionHostsToReplace = $sessionHostsToKeep | Sort-Object -Property Session,VMName -Descending | Select-Object -First (-$sessionHostsToDeployCount)
-        Write-PSFMessage -Level Host -Message "We need to {0} extra session hosts: {1}" -StringValues $sessionHostsToReplace.Count,($sessionHostsToReplace.VMName -join ',')
+        Write-PSFMessage -Level Host -Message "We need to decommission {0} extra session hosts: {1}" -StringValues $sessionHostsToReplace.Count,($sessionHostsToReplace.VMName -join ',')
     }
     else{
         Write-PSFMessage -Level Host -Message "We have enough session hosts in good shape."

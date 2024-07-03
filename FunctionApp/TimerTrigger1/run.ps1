@@ -17,8 +17,9 @@ $sessionHostNamePrefixB = Get-FunctionConfig _SessionHostNamePrefixB
 $sessionHostResourceGroupNameA = Get-FunctionConfig _SessionHostResourceGroupNameA
 $sessionHostResourceGroupNameB = Get-FunctionConfig _SessionHostResourceGroupNameB
 
-foreach($site in $sites){ #iterate for each site in the hostpool/function app
- if($site = "A"){
+foreach($mySite in $sites) { #iterate for each site in the hostpool/function app
+
+ if($mySite -like "A"){
             $sessionHostResourceGroupName = Get-FunctionConfig _SessionHostResourceGroupNameA
             $sessionHostParameters = Get-FunctionConfig _SessionHostParametersA #contains region, subnet
             $sessionHostNamePrefix = Get-FunctionConfig _SessionHostNamePrefixA
@@ -29,28 +30,16 @@ foreach($site in $sites){ #iterate for each site in the hostpool/function app
             $sessionHostNamePrefix = Get-FunctionConfig _SessionHostNamePrefixB
         }
 
-Write-PSFMessage -Level Host -Message "Checking session hosts in site {0}" -StringValues $site
+Write-PSFMessage -Level Host -Message "-------------------------------------------"
+Write-PSFMessage -Level Host -Message "Checking session hosts in site {0}" -StringValues $mySite
 Write-PSFMessage -Level Host -Message "Using resource group {0} for session hosts" -StringValues $sessionHostResourceGroupName
 Write-PSFMessage -Level Host -Message "Using prefix {0} for session hosts" -StringValues $sessionHostNamePrefix
-Write-PSFMessage -Level Host -Message "Using Parameters for session hosts: `n{0}" -StringValues $sessionHostParameters
+#Write-PSFMessage -Level Host -Message "Using Parameters for session hosts: `n{0}" -StringValues $sessionHostParameters #TODO - convertType collection to string
+# Get session hosts and update tags if needed.
+$sessionHosts = Get-SHRSessionHost -FixSessionHostTags:(Get-FunctionConfig _FixSessionHostTags) -SessionHostPrefix $sessionHostNamePrefix
+Write-PSFMessage -Level Host -Message "Found {0} session hosts" -StringValues $sessionHosts.Count
 
-<# Comment out Logic while tuning params
-
-        # Decide which Resource groups to use for Session Hosts
-        $hostPoolResourceGroupName = Get-FunctionConfig _HostPoolResourceGroupName
-            # 
-            if($site = "A"){
-            $sessionHostResourceGroupName = Get-FunctionConfig _SessionHostResourceGroupNameA
-            }
-            else {$sessionHostResourceGroupName = Get-FunctionConfig _SessionHostResourceGroupNameB
-            }
-        Write-PSFMessage -Level Host -Message "Using resource group {0} for session hosts" -StringValues $sessionHostResourceGroupName
-
-        # Get session hosts and update tags if needed.
-        $sessionHosts = Get-SHRSessionHost -FixSessionHostTags:(Get-FunctionConfig _FixSessionHostTags) -
-        Write-PSFMessage -Level Host -Message "Found {0} session hosts" -StringValues $sessionHosts.Count
-
-        # Filter to Session hosts that are included in auto replace
+# Filter to Session hosts that are included in auto replace
         $sessionHostsFiltered = $sessionHosts | Where-Object { $_.IncludeInAutomation }
         Write-PSFMessage -Level Host -Message "Filtered to {0} session hosts enabled for automatic replacement: {1}" -StringValues $sessionHostsFiltered.Count, ($sessionHostsFiltered.VMName -join ',')
 
@@ -58,8 +47,8 @@ Write-PSFMessage -Level Host -Message "Using Parameters for session hosts: `n{0}
         $runningDeployments = Get-SHRRunningDeployment -ResourceGroupName $sessionHostResourceGroupName
         Write-PSFMessage -Level Host -Message "Found {0} running deployments" -StringValues $runningDeployments.Count
 
-        # load session host parameters
-        $sessionHostParameters = (Get-FunctionConfig _SessionHostParameters)
+        # load session host parameters --Moved to mySite selector above
+        #$sessionHostParameters = (Get-FunctionConfig _SessionHostParameters)
 
         # Get latest version of session host image
         Write-PSFMessage -Level Host -Message "Getting latest image version using Image Reference: {0}" -StringValues ($sessionHostParameters.ImageReference | Out-String)
@@ -67,14 +56,15 @@ Write-PSFMessage -Level Host -Message "Using Parameters for session hosts: `n{0}
 
         # Get number session hosts to deploy
         $hostPoolDecisions = Get-SHRHostPoolDecision -SessionHosts $sessionHostsFiltered -RunningDeployments $runningDeployments -LatestImageVersion $latestImageVersion
-
+        
         # Deploy new session hosts
         if ($hostPoolDecisions.PossibleDeploymentsCount -gt 0) {
             Write-PSFMessage -Level Host -Message "We will deploy {0} session hosts" -StringValues $hostPoolDecisions.PossibleDeploymentsCount
             # Deploy session hosts
             $existingSessionHostVMNames = (@($sessionHosts.VMName) + @($hostPoolDecisions.ExistingSessionHostVMNames)) | Sort-Object | Select-Object -Unique
-
-            Deploy-SHRSessionHost -SessionHostResourceGroupName $sessionHostResourceGroupName -NewSessionHostsCount $hostPoolDecisions.PossibleDeploymentsCount -ExistingSessionHostVMNames $existingSessionHostVMNames
+            
+            # commented out ####################
+            #Deploy-SHRSessionHost -SessionHostResourceGroupName $sessionHostResourceGroupName -NewSessionHostsCount $hostPoolDecisions.PossibleDeploymentsCount -ExistingSessionHostVMNames $existingSessionHostVMNames
         }
 
         # Delete expired session hosts
@@ -82,13 +72,17 @@ Write-PSFMessage -Level Host -Message "Using Parameters for session hosts: `n{0}
             Write-PSFMessage -Level Host -Message "We will decommission {0} session hosts: {1}" -StringValues $hostPoolDecisions.SessionHostsPendingDelete.Count, ($hostPoolDecisions.SessionHostsPendingDelete.VMName -join ',')
             # Decommission session hosts
             $removeAzureDevice = Get-FunctionConfig _RemoveAzureADDevice
-            Remove-SHRSessionHost -SessionHostsPendingDelete $hostPoolDecisions.SessionHostsPendingDelete -RemoveAzureDevice $removeAzureDevice
+            
+            #commented out ####################
+            #Remove-SHRSessionHost -SessionHostsPendingDelete $hostPoolDecisions.SessionHostsPendingDelete -RemoveAzureDevice $removeAzureDevice
         }
-#>
+        
+        # Write an information log with the current time.
+        Write-Host "PowerShell timer trigger function finished! TIME: $currentUTCtime"
+    
+    
 
 } #end foreach site in the hostpool
-
-
 
 # Write an information log with the current time.
 Write-Host "PowerShell timer trigger function finished! TIME: $currentUTCtime"

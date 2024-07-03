@@ -5,7 +5,7 @@ function Deploy-SHRSessionHost {
         [string[]] $ExistingSessionHostVMNames = @(),
 
         [Parameter(Mandatory = $true)]
-        [int] $NewSessionHostsCount,
+        [int] $NewSessionHostsCount, 
 
         [Parameter(Mandatory = $false)]
         [string] $HostPoolResourceGroupName = (Get-FunctionConfig _HostPoolResourceGroupName),
@@ -16,8 +16,10 @@ function Deploy-SHRSessionHost {
         [Parameter()]
         [string] $HostPoolName = (Get-FunctionConfig _HostPoolName),
 
-        [Parameter()]
-        [string] $SessionHostNamePrefix = (Get-FunctionConfig _SessionHostNamePrefix),
+        #[Parameter()]
+        #[string] $SessionHostNamePrefix = (Get-FunctionConfig _SessionHostNamePrefix),
+        [Parameter(Mandatory)]
+        [string] $SessionHostNamePrefix,
 
         [Parameter()]
         [int] $SessionHostInstanceNumberPadding = (Get-FunctionConfig _SessionHostInstanceNumberPadding),
@@ -36,12 +38,15 @@ function Deploy-SHRSessionHost {
         [Parameter()]
         [string] $TagDeployTimestamp = (Get-FunctionConfig _Tag_DeployTimestamp),
 
-        [Parameter()]
-        [hashtable] $SessionHostParameters = (Get-FunctionConfig _SessionHostParameters | ConvertTo-CaseInsensitiveHashtable), #TODO: Port this into AzureFunctionConfiguration module and make it ciHashtable type.
+        #[Parameter()]
+        #[hashtable] $SessionHostParameters = (Get-FunctionConfig _SessionHostParameters | ConvertTo-CaseInsensitiveHashtable), #TODO: Port this into AzureFunctionConfiguration module and make it ciHashtable type.
+        [Parameter(Mandatory)]
+        [hashtable] $SessionHostParameters,
 
         [Parameter()]
         [string] $VMNamesTemplateParameterName = (Get-FunctionConfig _VMNamesTemplateParameterName)
     )
+    
     Write-PSFMessage -Level Host -Message "Generating new token for the host pool {0} in Resource Group {1}" -StringValues $HostPoolName, $HostPoolResourceGroupName
     $hostPoolToken = New-AzWvdRegistrationInfo -ResourceGroupName $HostPoolResourceGroupName -HostPoolName $HostPoolName -ExpirationTime (Get-Date).AddHours(2) -ErrorAction Stop
 

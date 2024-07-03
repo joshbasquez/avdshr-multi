@@ -10,6 +10,21 @@ if ($Timer.IsPastDue) {
 }
 $sites = @("A","B")
 
+# define function for hashtable conversion
+function ConvertTo-CaseInsensitiveHashtable {
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [hashtable]
+        $Hashtable
+    )
+    $ciHashtable = [hashtable]::new([System.StringComparer]::InvariantCultureIgnoreCase)
+    $Hashtable.Keys | ForEach-Object {
+        $ciHashtable[$_] = $Hashtable[$_]
+    }
+    return $ciHashtable
+}
+
+
 $sessionHostParametersA = Get-FunctionConfig _SessionHostParametersA #contains region, subnet
 $sessionHostParametersB = Get-FunctionConfig _SessionHostParametersB
 $sessionHostNamePrefixA = Get-FunctionConfig _SessionHostNamePrefixA
@@ -63,8 +78,12 @@ Write-PSFMessage -Level Host -Message "Found {0} session hosts" -StringValues $s
             # Deploy session hosts
             $existingSessionHostVMNames = (@($sessionHosts.VMName) + @($hostPoolDecisions.ExistingSessionHostVMNames)) | Sort-Object | Select-Object -Unique
             
-            # commented out ####################
-            #Deploy-SHRSessionHost -SessionHostResourceGroupName $sessionHostResourceGroupName -NewSessionHostsCount $hostPoolDecisions.PossibleDeploymentsCount -ExistingSessionHostVMNames $existingSessionHostVMNames
+            Deploy-SHRSessionHost `
+            -SessionHostResourceGroupName $sessionHostResourceGroupName `
+            -NewSessionHostsCount $hostPoolDecisions.PossibleDeploymentsCount `
+            -ExistingSessionHostVMNames $existingSessionHostVMNames `
+            -SessionHostParameters ($SessionHostParameters | ConvertTo-CaseInsensitiveHashtable) `
+            -SessionHostNamePrefix $sessionHostNamePrefix
         }
 
         # Delete expired session hosts

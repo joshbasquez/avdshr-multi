@@ -7,15 +7,6 @@
             "title": "AVD Session Host Replacer [multi-region edition]",
             "steps": [
                 {
-                    "name": "infoMessage",
-                    "type": "Microsoft.Common.InfoBox",
-                    "visible": true,
-                    "options": {
-                        "icon": "Info",
-                        "text": "Select a location for your function app"
-                    }
-                },
-                {
                     "name": "basics",
                     "label": "Deployment Basics",
                     "elements": [
@@ -27,6 +18,15 @@
                                 "resourceTypes": [
                                     "Microsoft.DesktopVirtualization/HostPools"
                                 ]
+                            }
+                        },
+                        {
+                            "name": "infoMessage",
+                            "type": "Microsoft.Common.InfoBox",
+                            "visible": true,
+                            "options": {
+                                "icon": "Info",
+                                "text": "Select Region for Function App"
                             }
                         },
                         {

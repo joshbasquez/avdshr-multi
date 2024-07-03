@@ -26,7 +26,7 @@
                             "visible": true,
                             "options": {
                                 "icon": "Info",
-                                "text": "Select Region for Function App, should contain Hostpool. "
+                                "text": "Select location for function app. `n Prerequisites:`n -LogAnalyticsWorkspace for FunctionApp logs"
                             }
                         },
                         {
@@ -856,42 +856,6 @@
                                     "toolTip": "Virtual Trusted Platform Module (vTPM) is TPM2.0 compliant and validates your VM boot integrity apart from securely storing keys and secrets."
                                 }
                             ]
-                        },
-                        {
-                            "name": "vnet",
-                            "type": "Microsoft.Network.VirtualNetworkCombo",
-                            "label": {
-                                "virtualNetwork": "Virtual network",
-                                "subnetA": "SubnetA"
-                            },
-                            "toolTip": {
-                                "virtualNetwork": "",
-                                "subnets": ""
-                            },
-                            "defaultValue": {
-                                "name": "vnet01",
-                                "addressPrefixSize": "/16"
-                            },
-                            "constraints": {
-                                "minAddressPrefixSize": "/16"
-                            },
-                            "options": {
-                                "hideExisting": false
-                            },
-                            "subnetA": {
-                                "subnet": {
-                                    "label": "Site A Subnet",
-                                    "defaultValue": {
-                                        "name": "subnet",
-                                        "addressPrefixSize": "/26"
-                                    },
-                                    "constraints": {
-                                        "minAddressPrefixSize": "/26",
-                                        "minAddressCount": 8
-                                    }
-                                }
-                            },
-                            "visible": true
                         },
                         {
                             "name": "SubnetIdA",

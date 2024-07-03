@@ -40,9 +40,9 @@
                                     "type": "Microsoft.Common.CheckBox",
                                     "label": "Enable Monitoring",
                                     "toolTip": "[Recommended] If enabled, the session host replacer will use App Insights and Log Analytics to collect metrics and logs.",
-                                    "defaultValue": false,
+                                    "defaultValue": true,
                                     "constraints": {
-                                        "required": false
+                                        "required": true
                                     }
                                 },
                                 {

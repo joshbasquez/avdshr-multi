@@ -55,7 +55,7 @@ Write-PSFMessage -Level Host -Message "Found {0} session hosts" -StringValues $s
         $latestImageVersion = Get-SHRLatestImageVersion -ImageReference $sessionHostParameters.ImageReference
 
         # Get number session hosts to deploy
-        $hostPoolDecisions = Get-SHRHostPoolDecision -SessionHosts $sessionHostsFiltered -RunningDeployments $runningDeployments -LatestImageVersion $latestImageVersion
+        $hostPoolDecisions = Get-SHRHostPoolDecision -SessionHosts $sessionHostsFiltered -RunningDeployments $runningDeployments -LatestImageVersion $latestImageVersion -SessionHostPrefix $sessionHostNamePrefix
         
         # Deploy new session hosts
         if ($hostPoolDecisions.PossibleDeploymentsCount -gt 0) {

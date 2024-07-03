@@ -26,7 +26,7 @@
                             "visible": true,
                             "options": {
                                 "icon": "Info",
-                                "text": "Select location for function app. `n Prerequisites:`n -LogAnalyticsWorkspace for FunctionApp logs"
+                                "text": "Select location for function app. `n Prerequisites: `n-LogAnalyticsWorkspace for FunctionApp logs `n-Existing Hostpool with virtual machines in 2 regions"
                             }
                         },
                         {

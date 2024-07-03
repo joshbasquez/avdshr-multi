@@ -24,16 +24,19 @@ function Get-SHRSessionHost {
         [string] $TagDeployTimestamp = (Get-FunctionConfig _Tag_DeployTimestamp),
         [Parameter()]
         [string] $TagPendingDrainTimeStamp = (Get-FunctionConfig _Tag_PendingDrainTimestamp),
-
-
-        [Parameter()]
-        [switch] $FixSessionHostTags
+        
+        [Parameter()] [switch] $FixSessionHostTags,
+        [Parameter()] [string] $SessionHostPrefix
 
     )
-
+    
     # Get current session hosts
-    Write-PSFMessage -Level Host -Message 'Getting current session hosts in host pool {0}' -StringValues $HostPoolName
-    $sessionHosts = Get-AzWvdSessionHost -ResourceGroupName $ResourceGroupName -HostPoolName $HostPoolName -ErrorAction Stop | Select-Object Name, ResourceId, Session, AllowNewSession, Status
+    
+    Write-PSFMessage -Level Host -Message 'Getting current session hosts in host pool {0} with prefix {1}' -StringValues $HostPoolName,$SessionHostPrefix
+    # MODIFIED FOR MULTI-SITE SUPPORT
+    $sessionHosts = Get-AzWvdSessionHost -ResourceGroupName $ResourceGroupName -HostPoolName $HostPoolName -ErrorAction Stop |
+    ?{$_.Name -like "*/$SessionHostPrefix*"} | Select-Object Name, ResourceId, Session, AllowNewSession, Status
+        
     Write-PSFMessage -Level Host -Message 'Found {0} session hosts' -StringValues $sessionHosts.Count
 
     # For each session host, get the VM details

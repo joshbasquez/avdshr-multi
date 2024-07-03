@@ -89,19 +89,15 @@ Write-PSFMessage -Level Host -Message "Found {0} session hosts" -StringValues $s
         # Delete expired session hosts
         if ($hostPoolDecisions.AllowSessionHostDelete -and $hostPoolDecisions.SessionHostsPendingDelete.Count -gt 0) {
             Write-PSFMessage -Level Host -Message "We will decommission {0} session hosts: {1}" -StringValues $hostPoolDecisions.SessionHostsPendingDelete.Count, ($hostPoolDecisions.SessionHostsPendingDelete.VMName -join ',')
-            # Decommission session hosts
-            $removeAzureDevice = Get-FunctionConfig _RemoveAzureADDevice
             
-            #commented out ####################
-            #Remove-SHRSessionHost -SessionHostsPendingDelete $hostPoolDecisions.SessionHostsPendingDelete -RemoveAzureDevice $removeAzureDevice
+            # Decommission session hosts
+            $removeAzureDevice = Get-FunctionConfig _RemoveAzureADDevice            
+            Remove-SHRSessionHost -SessionHostsPendingDelete $hostPoolDecisions.SessionHostsPendingDelete -RemoveAzureDevice $removeAzureDevice
         }
         
         # Write an information log with the current time.
-        Write-Host "PowerShell timer trigger function finished! TIME: $currentUTCtime"
-    
-    
+        Write-PSFMessage -Level Host -Message "-------------------------------------------"
+        Write-PSFMessage -Level Host -Message "AVD Session Host Replacer Finished for site: {0} at TIME: $currentUTCtime" -StringValues $mySite
+        Write-PSFMessage -Level Host -Message "-------------------------------------------"
 
 } #end foreach site in the hostpool
-
-# Write an information log with the current time.
-Write-Host "PowerShell timer trigger function finished! TIME: $currentUTCtime"

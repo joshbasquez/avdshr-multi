@@ -564,7 +564,7 @@
             }
           },
           "variables": {
-            "varStorageAccountName": "[format('stavdrpfunc{0}', uniqueString(parameters('FunctionAppName')))]",
+            "varStorageAccountName": "[format('storavdfa-{0}', uniqueString(resourceGroup().id, parameters('HostPoolName')))]",
             "varLogAnalyticsWorkspaceName": "[format('{0}-law', parameters('FunctionAppName'))]",
             "varAppServicePlanName": "[format('{0}-asp', parameters('FunctionAppName'))]"
           },

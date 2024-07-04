@@ -1,4 +1,4 @@
-# Welcome to Azure Virtual Desktop (AVD) Session Host Replacer
+# Welcome to Azure Virtual Desktop (AVD) Session Host Replacer [multi-site edition]
 
 ## Overview
 

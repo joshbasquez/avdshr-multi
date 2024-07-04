@@ -23,17 +23,7 @@ function ConvertTo-CaseInsensitiveHashtable {
     }
     return $ciHashtable
 }
-
-
-$sessionHostParametersA = Get-FunctionConfig _SessionHostParametersA #contains region, subnet
-$sessionHostParametersB = Get-FunctionConfig _SessionHostParametersB
-$sessionHostNamePrefixA = Get-FunctionConfig _SessionHostNamePrefixA
-$sessionHostNamePrefixB = Get-FunctionConfig _SessionHostNamePrefixB
-$sessionHostResourceGroupNameA = Get-FunctionConfig _SessionHostResourceGroupNameA
-$sessionHostResourceGroupNameB = Get-FunctionConfig _SessionHostResourceGroupNameB
-
 foreach($mySite in $sites) { #iterate for each site in the hostpool/function app
-
  if($mySite -like "A"){
             $sessionHostResourceGroupName = Get-FunctionConfig _SessionHostResourceGroupNameA
             $sessionHostParameters = Get-FunctionConfig _SessionHostParametersA #contains region, subnet
@@ -44,7 +34,6 @@ foreach($mySite in $sites) { #iterate for each site in the hostpool/function app
             $sessionHostParameters = Get-FunctionConfig _SessionHostParametersB
             $sessionHostNamePrefix = Get-FunctionConfig _SessionHostNamePrefixB
         }
-
 Write-PSFMessage -Level Host -Message "-------------------------------------------"
 Write-PSFMessage -Level Host -Message "Checking session hosts in site {0}" -StringValues $mySite
 Write-PSFMessage -Level Host -Message "Using resource group {0} for session hosts" -StringValues $sessionHostResourceGroupName
